@@ -101,7 +101,7 @@ public class principal {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.statusCode() != 200) {
-                System.out.println("⚠️ Erro na API. Código: " + response.statusCode());
+                System.out.println("Erro na API. Código: " + response.statusCode());
                 continue;
             }
 
@@ -109,19 +109,19 @@ public class principal {
             Mapear json = gson.fromJson(response.body(), Mapear.class);
 
             if (!"success".equals(json.result)) {
-                System.out.println("⚠️ Erro na resposta da API.");
+                System.out.println("Erro na resposta da API.");
                 continue;
             }
 
             if (!json.conversion_rates.containsKey(moedaDestino)) {
-                System.out.println("⚠️ Moeda de destino não encontrada.");
+                System.out.println("Moeda de destino não encontrada.");
                 continue;
             }
 
             double taxa = json.conversion_rates.get(moedaDestino);
             double convertido = valor * taxa;
 
-            System.out.printf("💰 %.2f %s = %.2f %s%n%n", valor, moedaOrigem, convertido, moedaDestino);
+            System.out.printf("%.2f %s = %.2f %s%n%n", valor, moedaOrigem, convertido, moedaDestino);
         }
 
         menu.close();
